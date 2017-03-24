@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 public class ViaCepProvider implements CepProvider {
     @Override
     public CepInfo find(String cep) {
-        return null;
+        return CepInfo.builder().build();
     }
 }
