@@ -26,18 +26,18 @@ public class CepValidatorTest {
 
     @Test(expected = InvalidCepException.class)
     public void returna_cep_invalido_com_espaco() throws Exception {
-        validator.validate("9999999 9");
+        validator.validate("999999 9");
     }
 
     @Test
     public void returna_cep_valido() throws Exception {
-        validator.validate("999999999");
-        assertThat(validator.isValid("999999999"), is(true));
+        validator.validate("99999999");
+        assertThat(validator.isValid("99999999"), is(true));
     }
 
     @Test
     public void returna_cep_invalido_com_numero_a_menos() throws Exception {
-        assertThat(validator.isValid("99999999"), is(false));
+        assertThat(validator.isValid("9999999"), is(false));
     }
 
     @Test

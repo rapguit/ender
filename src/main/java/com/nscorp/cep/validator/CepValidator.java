@@ -15,7 +15,7 @@ public class CepValidator {
     public boolean isValid(String cep) {
         return isNotBlank(cep) &&
                 isNumeric(cep) &&
-                cep.trim().length() == 9;
+                cep.trim().length() == 8;
     }
 
     public void validate(String cep) {

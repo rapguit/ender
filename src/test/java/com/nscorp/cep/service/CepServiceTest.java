@@ -12,6 +12,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -26,7 +27,7 @@ public class CepServiceTest {
     @InjectMocks private CepService service;
 
     @Test
-    public void returna_endereco_de_cep_valido() throws Exception {
+    public void retorna_endereco_de_cep_valido() throws Exception {
         CepInfo info = CepInfo.builder()
                 .bairro("bairro")
                 .cep("20000012")
@@ -44,6 +45,31 @@ public class CepServiceTest {
 
         assertThat(address.getDistrict(), equalTo("bairro"));
         assertThat(address.getZip(), equalTo("20000012"));
+        assertThat(address.getCity(), equalTo("localidade"));
+        assertThat(address.getStreet(), equalTo("logradouro"));
+        assertThat(address.getState(), equalTo("UF"));
+    }
+
+    @Test
+    public void retorna_endereco_de_cep_apos_tentativas() throws Exception {
+        CepInfo info = CepInfo.builder()
+                .bairro("bairro")
+                .cep("22330000")
+                .localidade("localidade")
+                .logradouro("logradouro")
+                .uf("UF")
+                .build();
+
+        when(provider.find(eq("22330000"))).thenReturn(info);
+        when(provider.find(argThat(not(equalTo("22330000"))))).thenReturn(CepInfo.builder().erro(true).build());
+
+        Address address = service.findAddressByCep("22333999");
+
+        verify(provider, times(5)).find(anyString());
+        verify(validator, only()).validate(anyString());
+
+        assertThat(address.getDistrict(), equalTo("bairro"));
+        assertThat(address.getZip(), equalTo("22330000"));
         assertThat(address.getCity(), equalTo("localidade"));
         assertThat(address.getStreet(), equalTo("logradouro"));
         assertThat(address.getState(), equalTo("UF"));

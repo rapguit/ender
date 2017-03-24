@@ -26,4 +26,6 @@ public class CepInfo implements Serializable {
     private String ibge;
     private String gia;
 
+    private boolean erro;
+
 }
