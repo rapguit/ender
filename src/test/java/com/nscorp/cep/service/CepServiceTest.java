@@ -1,6 +1,8 @@
 package com.nscorp.cep.service;
 
 import com.nscorp.cep.dto.CepInfo;
+import com.nscorp.cep.exception.CepNotFoundException;
+import com.nscorp.cep.exception.InvalidCepException;
 import com.nscorp.cep.provider.CepProvider;
 import com.nscorp.cep.validator.CepValidator;
 import com.nscorp.model.Address;
@@ -73,5 +75,29 @@ public class CepServiceTest {
         assertThat(address.getCity(), equalTo("localidade"));
         assertThat(address.getStreet(), equalTo("logradouro"));
         assertThat(address.getState(), equalTo("UF"));
+    }
+
+    @Test(expected = CepNotFoundException.class)
+    public void retorna_cep_nao_encontrado() throws Exception {
+        CepInfo info = CepInfo.builder()
+                .erro(true)
+                .build();
+
+        when(provider.find(anyString())).thenReturn(info);
+
+        service.findAddressByCep("22333999");
+
+        verify(provider, times(8)).find(anyString());
+        verify(validator, only()).validate(anyString());
+    }
+
+    @Test(expected = InvalidCepException.class)
+    public void retorna_cep_invalido() throws Exception {
+        doThrow(InvalidCepException.class).when(validator).validate(anyString());
+
+        service.findAddressByCep("ABC");
+
+        verify(provider, never()).find(anyString());
+        verify(validator, only()).validate(anyString());
     }
 }

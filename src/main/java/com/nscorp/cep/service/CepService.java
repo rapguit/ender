@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CepService {
 
+    public static final String EXAUSTED_CEP = "00000000";
+
     @Autowired
     private CepProvider provider;
 
@@ -28,14 +30,17 @@ public class CepService {
     }
 
     private CepInfo tryToFind(String cep, int retryCounter) {
-        String cepTmp = transformCep(cep, retryCounter);
+        String cepTmp = transformCepAddZeroesRightToLeft(cep, retryCounter);
+        if(CepService.EXAUSTED_CEP.equals(cepTmp)) throw new CepNotFoundException();
         CepInfo cepInfo = provider.find(cepTmp);
         if(cepInfo.isErro()) cepInfo = tryToFind(cep, retryCounter + 1);
         return cepInfo;
     }
 
-    private String transformCep(String cep, int rindex) {
-        if(rindex == cep.length()) throw new CepNotFoundException();
+    private String transformCepAddZeroesRightToLeft(String cep, int rindex) {
+        if(rindex == cep.length()) {
+            return EXAUSTED_CEP;
+        }
 
         StringBuilder sb = new StringBuilder();
         String partial = cep.substring(0, cep.length() - rindex);

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by raphael on 24/03/17.
  */
 @RestController
-@RequestMapping("ender/address")
+@RequestMapping("ender/ws/cep-address")
 public class CepController {
 
     @Autowired

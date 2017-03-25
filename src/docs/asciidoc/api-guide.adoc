@@ -11,7 +11,7 @@ Raphael Fialho;
 [introduction]
 = Introduction
 
-Ender is a RESTful microservice.
+Ender is a address manager software.
 
 [[overview]]
 = Overview
@@ -74,17 +74,17 @@ use of HTTP status codes.
 == Address
 The Address resource is used to find a address by the giving cep.
 
-[[resource-find-address-by-cep]]
+[[resource-cep-address]]
 === Finding a address by cep
 A `POST` request one of the service's address.
 
 *Request Fields*
-include::{snippets}/find-address-by-cep/request-fields.adoc[]
+include::{snippets}/cep-address/request-fields.adoc[]
 
 ==== Example request
 
-include::{snippets}/find-address-by-cep/curl-request.adoc[]
+include::{snippets}/cep-address/curl-request.adoc[]
 
 ==== Example response
 
-include::{snippets}/find-address-by-cep/http-response.adoc[]
+include::{snippets}/cep-address/http-response.adoc[]

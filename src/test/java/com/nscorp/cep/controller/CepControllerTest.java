@@ -78,11 +78,11 @@ public class CepControllerTest {
 
         CepCriteria payload = new CepCriteria("22333111");
         this.mockMvc.perform(
-                post("/ender/address")
+                post("/ender/ws/cep-address")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(payload)))
                 .andExpect(status().isOk())
-                .andDo(document("find-address-by-cep",
+                .andDo(document("cep-address",
                         requestFields(
                                 fieldWithPath("cep").description("The cep search criteria.")
                         ),
