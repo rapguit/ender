@@ -439,10 +439,35 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#resources-address">Address</a>
 <ul class="sectlevel2">
-<li><a href="#resource-find-address-by-cep">Finding a address by cep</a>
+<li><a href="#resource-cep-address">Finding a address by cep</a>
 <ul class="sectlevel3">
 <li><a href="#_example_request">Example request</a></li>
 <li><a href="#_example_response">Example response</a></li>
+</ul>
+</li>
+<li><a href="#resource-address-find-all">Listing address</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_2">Example request</a></li>
+<li><a href="#_example_response_2">Example response</a></li>
+</ul>
+</li>
+<li><a href="#resource-address-find-one">Finding a address</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_3">Example request</a></li>
+<li><a href="#_example_response_3">Example response</a></li>
+</ul>
+</li>
+<li><a href="#resource-address-save">Saving address</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_4">Example request</a></li>
+<li><a href="#_example_response_4">Example response</a></li>
+<li><a href="#_example_response_400_badrequest">Example response: 400 BadRequest</a></li>
+</ul>
+</li>
+<li><a href="#resource-address-delete">Deleting address</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_5">Example request</a></li>
+<li><a href="#_example_response_5">Example response</a></li>
 </ul>
 </li>
 </ul>
@@ -457,7 +482,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_introduction"><a class="link" href="#_introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Ender is a RESTful microservice.</p>
+<p>Ender is a address manager software.</p>
 </div>
 </div>
 </div>
@@ -557,12 +582,13 @@ use of HTTP status codes.</p>
 <h2 id="resources-address"><a class="link" href="#resources-address">Address</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Address resource is used to find a address by the giving cep.</p>
+<p>The Address resource is used to manage address.</p>
 </div>
 <div class="sect2">
-<h3 id="resource-find-address-by-cep"><a class="link" href="#resource-find-address-by-cep">Finding a address by cep</a></h3>
+<h3 id="resource-cep-address"><a class="link" href="#resource-cep-address">Finding a address by cep</a></h3>
 <div class="paragraph">
-<p>A <code>POST</code> request one of the service&#8217;s address.</p>
+<p>Find a address by the giving cep.
+A <code>POST</code> request one of the service&#8217;s transient address.</p>
 </div>
 <div class="paragraph">
 <p><strong>Request Fields</strong></p>
@@ -588,11 +614,70 @@ use of HTTP status codes.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><strong>Response fields</strong></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address id.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.zip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address zip code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.state</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.city</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address city.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.district</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address district.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.street</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address street.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.complement</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address complement.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
 <h4 id="_example_request"><a class="link" href="#_example_request">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/ender/address' -i -X POST -H 'Content-Type: application/json' -d '{"cep":"22333111"}'</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/ender/ws/cep-address' -i -X POST -H 'Content-Type: application/json' -d '{"cep":"22333111"}'</code></pre>
 </div>
 </div>
 </div>
@@ -602,9 +687,360 @@ use of HTTP status codes.</p>
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 121
+Content-Length: 135
 
-{"id":null,"zip":"22333111","state":"UF","city":"localidade","district":"bairro","street":"logradouro","complement":null}</code></pre>
+{"id":null,"zip":"22333111","state":"UF","city":"localidade","street":"logradouro","number":null,"district":"bairro","complement":null}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resource-address-find-all"><a class="link" href="#resource-address-find-all">Listing address</a></h3>
+<div class="paragraph">
+<p>A <code>GET</code> request lists all of the service&#8217;s address.</p>
+</div>
+<div class="paragraph">
+<p><strong>Response fields</strong></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address id.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].zip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address zip code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].state</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].city</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address city.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].district</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address district.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].street</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address street.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].complement</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address complement.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_example_request_2"><a class="link" href="#_example_request_2">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/ender/ws/address' -i</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_2"><a class="link" href="#_example_response_2">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 155
+
+[{"id":"58d751098028744f173e7272","zip":"99999999","state":"UF","city":"localidade","street":"rua","number":"1","district":"bairro","complement":"apto 1"}]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resource-address-find-one"><a class="link" href="#resource-address-find-one">Finding a address</a></h3>
+<div class="paragraph">
+<p>A <code>GET</code> request one of the service&#8217;s address.</p>
+</div>
+<div class="paragraph">
+<p><strong>Path parameters</strong></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. /ender/ws/address/{id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The requested address id.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Response fields</strong></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address id.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.zip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address zip code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.state</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.city</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address city.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.district</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address district.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.street</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address street.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.complement</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address complement.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_example_request_3"><a class="link" href="#_example_request_3">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/ender/ws/address/58d751098028744f173e7274' -i -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_3"><a class="link" href="#_example_response_3">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 153
+
+{"id":"58d751098028744f173e7274","zip":"99999999","state":"UF","city":"localidade","street":"rua","number":"1","district":"bairro","complement":"apto 1"}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resource-address-save"><a class="link" href="#resource-address-save">Saving address</a></h3>
+<div class="paragraph">
+<p>A <code>POST</code> request to create or edit a address.</p>
+</div>
+<div class="paragraph">
+<p><strong>Request Fields</strong></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address id.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.zip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address zip code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.state</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.city</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address city.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.district</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address district.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.street</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address street.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>.complement</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The address complement.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Response Headers</strong></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The path of new resource created.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_example_request_4"><a class="link" href="#_example_request_4">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/ender/ws/address' -i -X POST -H 'Content-Type: application/json' -d '{"id":null,"zip":"99999999","state":"UF","city":"localidade","street":"rua","number":"1","district":"bairro","complement":"apto 1"}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_4"><a class="link" href="#_example_response_4">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
+Location: http://localhost:8080/ender/ws/address/58d751098028744f173e7271</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_400_badrequest"><a class="link" href="#_example_response_400_badrequest">Example response: 400 BadRequest</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+Content-Length: 149
+
+{"status":400,"message":"zip: may not be empty, street: may not be empty, state: may not be empty, number: may not be empty, city: may not be empty"}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resource-address-delete"><a class="link" href="#resource-address-delete">Deleting address</a></h3>
+<div class="paragraph">
+<p>A <code>DELETE</code> request to remove a address.</p>
+</div>
+<div class="paragraph">
+<p><strong>Path parameters</strong></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. /ender/ws/address/{id}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The requested address id.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_example_request_5"><a class="link" href="#_example_request_5">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/ender/ws/address/58d751098028744f173e7273' -i -X DELETE -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_5"><a class="link" href="#_example_response_5">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 204 No Content</code></pre>
 </div>
 </div>
 </div>
@@ -614,7 +1050,7 @@ Content-Length: 121
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-24 03:02:05 BRT
+Last updated 2017-03-26 02:25:59 BRT
 </div>
 </div>
 </body>
