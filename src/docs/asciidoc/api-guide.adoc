@@ -69,17 +69,20 @@ use of HTTP status codes.
 [[resources]]
 = Resources
 
-
 [[resources-address]]
 == Address
-The Address resource is used to find a address by the giving cep.
+The Address resource is used to manage address.
 
 [[resource-cep-address]]
 === Finding a address by cep
-A `POST` request one of the service's address.
+Find a address by the giving cep.
+A `POST` request one of the service's transient address.
 
 *Request Fields*
 include::{snippets}/cep-address/request-fields.adoc[]
+
+*Response fields*
+include::{snippets}/cep-address/response-fields.adoc[]
 
 ==== Example request
 
@@ -88,3 +91,72 @@ include::{snippets}/cep-address/curl-request.adoc[]
 ==== Example response
 
 include::{snippets}/cep-address/http-response.adoc[]
+
+[[resource-address-find-all]]
+=== Listing address
+A `GET` request lists all of the service's address.
+
+*Response fields*
+include::{snippets}/address-find-all/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/address-find-all/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/address-find-all/http-response.adoc[]
+
+[[resource-address-find-one]]
+=== Finding a address
+A `GET` request one of the service's address.
+
+*Path parameters*
+
+include::{snippets}/address-find-one/path-parameters.adoc[]
+
+*Response fields*
+
+include::{snippets}/address-find-one/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/address-find-one/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/address-find-one/http-response.adoc[]
+
+[[resource-address-save]]
+=== Saving address
+A `POST` request to create or edit a address.
+
+*Request Fields*
+include::{snippets}/address-save/request-fields.adoc[]
+
+*Response Headers*
+include::{snippets}/address-save/response-headers.adoc[]
+
+==== Example request
+
+include::{snippets}/address-save/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/address-save/http-response.adoc[]
+
+[[resource-address-delete]]
+=== Deleting address
+A `DELETE` request to remove a address.
+
+*Path parameters*
+
+include::{snippets}/address-delete/path-parameters.adoc[]
+
+==== Example request
+
+include::{snippets}/address-delete/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/address-delete/http-response.adoc[]
