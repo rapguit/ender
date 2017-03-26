@@ -145,6 +145,10 @@ include::{snippets}/address-save/curl-request.adoc[]
 
 include::{snippets}/address-save/http-response.adoc[]
 
+==== Example response: 400 BadRequest
+
+include::{snippets}/address-save-validation-error/http-response.adoc[]
+
 [[resource-address-delete]]
 === Deleting address
 A `DELETE` request to remove a address.

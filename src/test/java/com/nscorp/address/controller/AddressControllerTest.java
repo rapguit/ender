@@ -152,4 +152,21 @@ public class AddressControllerTest extends IntegrationTest {
                 );
     }
 
+    @Test
+    public void valida_endereco_antes_de_salvar() throws Exception {
+        Address payload = Address.builder().build();
+
+        getMockMvc().perform(
+                post("/ender/ws/address")
+                        .contentType(APPLICATION_JSON)
+                        .content(getObjectMapper().writeValueAsString(payload)))
+                .andExpect(status().isBadRequest())
+                .andDo(document("address-save-validation-error",
+                        responseFields(
+                                fieldWithPath(".status").description("Error status code."),
+                                fieldWithPath(".message").description("Error description")
+                        ))
+                );
+    }
+
 }

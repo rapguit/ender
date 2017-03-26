@@ -1,10 +1,12 @@
 package com.nscorp.address.controller;
 
+import com.nscorp.address.dto.Result;
 import com.nscorp.address.repository.AddressRepository;
 import com.nscorp.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -53,11 +55,15 @@ public class AddressController {
     }
 
     private ResponseEntity getErrorResponse(Errors errors) {
-        String message = errors.getAllErrors()
-                .stream()
-                .map(x -> x.getDefaultMessage())
-                .collect(Collectors.joining(","));
+        Result r = Result.builder().message(
+                errors.getAllErrors()
+                    .stream()
+                    .map(x -> String.format("%s: %s", ((FieldError) x).getField(), x.getDefaultMessage()))
+                    .collect(Collectors.joining(", "))
+                )
+                .status(400)
+                .build();
 
-        return ResponseEntity.badRequest().body(message);
+        return ResponseEntity.badRequest().body(r);
     }
 }
