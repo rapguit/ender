@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Lista de Endereços</title>
+</head>
+<body>
+    <h1>Endereços</h1>
+    <form>
+        <a th:href="@{/ender/address/new}">Novo Endereço</a>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>CEP</th>
+                <th>Rua</th>
+                <th>Ações</th>
+            </tr>
+            <tr th:each="addr : ${addressList}">
+                <td th:text="${addr.id}"></td>
+                <td th:text="${addr.zip}"></td>
+                <td th:text="${addr.street}"></td>
+                <td>
+                    <a th:href="@{/ender/address/view/{id}(id=${addr.id})}">Ver</a>
+                    <a th:href="@{/ender/address/edit/{id}(id=${addr.id})}">Editar</a>
+                    <a th:href="@{/ender/address/remove/{id}(id=${addr.id})}">Remover</a>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>

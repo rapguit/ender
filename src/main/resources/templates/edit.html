@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Atualizar Endereço</title>
+
+    <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Atualizar Endereço</h1>
+    <form action="#" th:action="@{/ender/address/save}" th:object="${address}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <p>CEP*: <input type="text" th:field="*{zip}" /></p>
+        <input type="button" id="loadZip" value="Buscar"/>
+        <div th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
+
+        <p>Estado*: <input type="text" th:field="*{state}" /></p>
+        <p>Cidade*: <input type="text" th:field="*{city}" /></p>
+        <p>Bairro: <input type="text" th:field="*{district}" /></p>
+        <p>Logradouro*: <input type="text" th:field="*{street}" /></p>
+        <p>Número*: <input type="text" th:field="*{number}" /></p>
+        <p>Complemento: <input type="text" th:field="*{complement}" /></p>
+
+        <input type="submit" value="Salvar" />
+        <a th:href="@{/ender/address/list}">Voltar</a>
+    </form>
+
+    <script>
+    /*<![CDATA[*/
+    $("#loadZip").on("click", function () {
+
+    });
+    /*]]>*/
+</script>
+</body>
+</html>
