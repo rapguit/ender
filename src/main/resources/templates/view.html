@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Endereço</title>
-
-    <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
-</head>
+<th:block layout:include="fragments/head"/>
 <body>
-    <h1>Endereço</h1>
-    <form>
-        <p>CEP*: <span th:utext="${address.zip}"></span></p>
-        <p>Estado*: <span th:utext="${address.state}" ></span></p>
-        <p>Cidade*: <span th:utext="${address.city}" ></span></p>
-        <p>Bairro: <span th:utext="${address.district}" ></span></p>
-        <p>Logradouro*: <span th:utext="${address.street}" ></span></p>
-        <p>Número*: <span th:utext="${address.number}" ></span></p>
-        <p>Complemento: <span th:utext="${address.complement}" ></span></p>
+<h1>Endereço</h1>
+<form>
 
-        <a th:href="@{/ender/address/list}">Voltar</a>
-    </form>
+    <div class="row">
+        <div class="col-sm-2">Id:</div>
+        <div class="col-sm-4"><span th:utext="${address.id}"></span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">CEP:</div>
+        <div class="col-sm-4"><span th:utext="${address.zip}"></span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">Estado:</div>
+        <div class="col-sm-4"><span th:utext="${address.state}"></span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">Cidade:</div>
+        <div class="col-sm-4"><span th:utext="${address.city}"></span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">Bairro:</div>
+        <div class="col-sm-4"><span th:utext="${address.district}"></span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">Logradouro:</div>
+        <div class="col-sm-4"><span th:utext="${address.street}"></span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">Número:</div>
+        <div class="col-sm-4"><span th:utext="${address.number}"></span></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">Complemento:</div>
+        <div class="col-sm-4"><span th:utext="${address.complement}"></span></div>
+    </div>
 
-    <script>
-    /*<![CDATA[*/
-    $("#loadZip").on("click", function () {
-        
-    });
-    /*]]>*/
-</script>
+    <a th:href="@{/ender/address/list}">Voltar</a>
+</form>
 </body>
 </html>

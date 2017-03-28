@@ -1,37 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Novo Endereço</title>
-
-    <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/src/cep-address.js}"></script>
-</head>
+<th:block layout:include="fragments/head"/>
 <body>
-    <h1>Novo Endereço</h1>
-    <form action="#" th:action="@{/ender/address/save}" th:object="${address}" method="post">
-        <p>CEP*: <input type="text" id="zip" th:field="*{zip}" /></p>
-        <input type="button" id="loadZip" value="Buscar"/>
-        <div th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
+<h1>Novo Endereço</h1>
+<form action="#" th:action="@{/ender/address/save}" th:object="${address}" method="post">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" id="zip" th:field="*{zip}" class="form-control" placeholder="CEP*"/>
+                <span class="input-group-btn">
+                <input type="button" id="loadZip" value="Buscar" class="btn btn-default"/>
+            </span>
+            </div>
+            <div th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
+        </div>
 
-        <p>Estado*: <input type="text" id="state" th:field="*{state}" /></p>
-        <div th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="state">Estado*:</label>
+                <input type="text" id="state" th:field="*{state}" class="form-control"/>
+            </div>
+            <div th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+        </div>
 
-        <p>Cidade*: <input type="text" id="city" th:field="*{city}" /></p>
-        <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="city">Cidade*: </label>
+                <input type="text" id="city" th:field="*{city}" class="form-control"/>
+            </div>
+            <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+        </div>
 
-        <p>Bairro: <input type="text" id="district" th:field="*{district}" /></p>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="district">Bairro: </label>
+                <input type="text" id="district" th:field="*{district}" class="form-control"/>
+            </div>
+        </div>
 
-        <p>Logradouro*: <input type="text" id="street" th:field="*{street}" /></p>
-        <div th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></div>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="street">Logradouro*: </label>
+                <input type="text" id="street" th:field="*{street}" class="form-control"/>
+            </div>
+            <div th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></div>
+        </div>
 
-        <p>Número*: <input type="text" th:field="*{number}" /></p>
-        <div th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="num">Número*: </label>
+                <input type="text" id="num" th:field="*{number}" class="form-control"/>
+            </div>
+            <div th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
+        </div>
 
-        <p>Complemento: <input type="text" th:field="*{complement}" /></p>
+        <div class="form-group">
+            <div class="input-group">
+                <label for="comp">Complemento: </label>
+                <input type="text" id="comp" th:field="*{complement}" class="form-control"/>
+            </div>
+        </div>
 
-        <input type="submit" value="Salvar" />
+        <input type="submit" value="Salvar" class="btn btn-success"/>
         <a th:href="@{/ender/address/list}">Voltar</a>
-    </form>
+    </div>
+</form>
 </body>
 </html>

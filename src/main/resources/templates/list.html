@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Lista de Endereços</title>
-</head>
+<th:block layout:include="fragments/head"/>
 <body>
-    <h1>Endereços</h1>
-    <form>
-        <a th:href="@{/ender/address/new}">Novo Endereço</a>
-        <table>
+<h1>Endereços</h1>
+<form>
+    <a th:href="@{/ender/address/new}">Novo Endereço</a>
+    <div class="panel panel-default">
+        <table class="table">
             <tr>
                 <th>Id</th>
                 <th>CEP</th>
@@ -27,7 +25,8 @@
                 <td></td>
             </tr>
         </table>
-    </form>
+    </div>
+</form>
 
 </body>
 </html>
