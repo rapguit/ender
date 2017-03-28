@@ -1,6 +1,7 @@
 /*<![CDATA[*/
 var main = function(){
     $("#loadZip").on("click", function () {
+        waitingDialog.show();
         var cep = $("#zip").val();
         var data = JSON.stringify({cep: cep});
         var url;
@@ -23,8 +24,10 @@ var main = function(){
                 $("#city").val(data.city);
                 $("#district").val(data.district);
                 $("#zip").val(data.zip);
+                waitingDialog.hide();
             },
             error: function(xhr, textStatus, errorThrown) {
+                waitingDialog.hide();
                 alert(xhr.responseJSON.message);
             }
         });
