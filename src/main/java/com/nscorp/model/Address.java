@@ -36,7 +36,7 @@ public class Address implements Serializable {
                 .state(cepInfo.getUf())
                 .street(cepInfo.getLogradouro())
                 .district(cepInfo.getBairro())
-                .zip(cepInfo.getCep())
+                .zip(cepInfo.getCep().replace("-",""))
                 .build();
     }
 }
