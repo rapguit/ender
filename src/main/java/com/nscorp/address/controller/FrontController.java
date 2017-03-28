@@ -2,6 +2,7 @@ package com.nscorp.address.controller;
 
 import com.nscorp.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static org.springframework.http.HttpHeaders.LOCATION;
+import static org.springframework.http.HttpMethod.POST;
 
 /**
  * Created by raphael on 27/03/17.
@@ -76,9 +79,15 @@ public class FrontController {
         }
 
         String url = String.format("http://%s:%s/ender/ws/address", req.getServerName(), req.getServerPort());
-        consumer.postForObject(url, address, Address.class);
+        HttpEntity<Address> response = consumer.exchange(url, POST, new HttpEntity<>(address), Address.class);
+        String addressId = extractAddressIdFromLocationHeader(response);
 
-        return "view";
+        return "redirect:view/" + addressId;
+    }
+
+    private String extractAddressIdFromLocationHeader(HttpEntity<Address> response) {
+        String[] urlParts = response.getHeaders().get(LOCATION).get(0).split("/");
+        return urlParts[urlParts.length-1];
     }
 
 }
