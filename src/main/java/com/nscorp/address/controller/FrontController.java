@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -68,8 +69,9 @@ public class FrontController {
     }
 
     @PostMapping("save")
-    public String saveAddress(@Valid Address address, ServletRequest req, BindingResult result){
+    public String saveAddress(@Valid Address address, BindingResult result, HttpServletRequest req){
         if (result.hasErrors()){
+            if(address.getId() != null) return "edit";
             return "new";
         }
 

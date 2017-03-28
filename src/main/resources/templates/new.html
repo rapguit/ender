@@ -15,10 +15,19 @@
         <div th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
 
         <p>Estado*: <input type="text" id="state" th:field="*{state}" /></p>
+        <div th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+
         <p>Cidade*: <input type="text" id="city" th:field="*{city}" /></p>
+        <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+
         <p>Bairro: <input type="text" id="district" th:field="*{district}" /></p>
+
         <p>Logradouro*: <input type="text" id="street" th:field="*{street}" /></p>
+        <div th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></div>
+
         <p>Número*: <input type="text" th:field="*{number}" /></p>
+        <div th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></div>
+
         <p>Complemento: <input type="text" th:field="*{complement}" /></p>
 
         <input type="submit" value="Salvar" />
