@@ -10,11 +10,11 @@ Dispõe de uma interface web e uma API Rest para gerenciar os endereços.
 ### Com Docker =)
 * baixar a imagem:
 ```
-docker pull rapguit/ender
+$ docker pull rapguit/ender
 ```
 * rodar o container:
 ```
-docker run -p 8080:8080 rapguit/ender
+$ docker run -p 8080:8080 rapguit/ender
 ```
 dockerhub: https://hub.docker.com/r/rapguit/ender/
 
