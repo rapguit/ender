@@ -1,17 +1,22 @@
 # ender
-##Description
+## Description
 Software de cadastro de endereços.
 
 Dispõe de uma interface web e uma API Rest para gerenciar os endereços.
 
 * API Guide: https://rapguit.github.io/ender/api-guide.html
 
-##Install
+## Install
 ### Com Docker =)
 Rodar os comandos:
-* docker pull rapguit/ender
-* docker run -p 8080:8080 rapguit/ender
-
+* baixar a imagem:
+```
+docker pull rapguit/ender
+```
+* rodar o container:
+```
+docker run -p 8080:8080 rapguit/ender
+```
 dockerhub: https://hub.docker.com/r/rapguit/ender/
 
 O conteiner é construído sobre java8 tomcat 8, e roda uma base de dados mongo embed.
