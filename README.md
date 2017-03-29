@@ -8,7 +8,6 @@ Dispõe de uma interface web e uma API Rest para gerenciar os endereços.
 
 ## Install
 ### Com Docker =)
-Rodar os comandos:
 * baixar a imagem:
 ```
 docker pull rapguit/ender
